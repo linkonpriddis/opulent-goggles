@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#183b2d">
+    <title>Fieldnotes | Assistant knowledge</title>
+    <link rel="stylesheet" href="/app.css">
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="Fieldnotes home">
+        <span class="brand-mark" aria-hidden="true">f.</span>
+        <span>fieldnotes</span>
+      </a>
+      <div class="topbar-status"><span class="status-dot"></span> Local workspace</div>
+    </header>
+
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="sidebar-heading">
+          <div>
+            <p class="eyebrow">Your workspace</p>
+            <h2>Assistants</h2>
+          </div>
+          <span id="assistant-count" class="count">0</span>
+        </div>
+        <ul id="assistant-list" class="assistant-list" aria-label="Assistants"></ul>
+
+        <form id="create-assistant" class="create-form">
+          <label for="assistant-name">New assistant</label>
+          <input id="assistant-name" name="name" maxlength="80" placeholder="e.g. Studio research" required>
+          <input id="assistant-description" name="description" maxlength="240" placeholder="What should it know?">
+          <button class="button button-dark" type="submit"><span aria-hidden="true">+</span> Create assistant</button>
+          <p id="create-error" class="form-error" role="alert"></p>
+        </form>
+
+        <div class="sidebar-note">
+          <span class="note-mark" aria-hidden="true">↳</span>
+          <p>Each assistant keeps its own searchable collection.</p>
+        </div>
+      </aside>
+
+      <main id="main-content" class="main-content">
+        <section id="welcome" class="welcome-state">
+          <div class="welcome-orbit" aria-hidden="true"><span>f.</span></div>
+          <p class="eyebrow">A quieter way to keep context</p>
+          <h1>Give your assistant<br>something to remember.</h1>
+          <p class="welcome-copy">Create an assistant, then add notes to its knowledge sheet. Ask questions and it will search those saved notes.</p>
+          <button id="welcome-create" class="button button-dark" type="button">Create your first assistant <span aria-hidden="true">→</span></button>
+        </section>
+
+        <section id="assistant-workspace" class="assistant-workspace" hidden>
+          <div class="page-heading">
+            <div>
+              <p class="eyebrow">Assistant knowledge</p>
+              <h1 id="active-name"></h1>
+              <p id="active-description" class="page-description"></p>
+            </div>
+            <div class="collection-count"><strong id="entry-count">0</strong><span>saved rows</span></div>
+          </div>
+
+          <section class="sheet-panel" aria-labelledby="sheet-title">
+            <div class="sheet-toolbar">
+              <div class="sheet-title-wrap">
+                <span class="sheet-icon" aria-hidden="true">▦</span>
+                <div>
+                  <h2 id="sheet-title">Knowledge sheet</h2>
+                  <p>Saved here, searchable by this assistant.</p>
+                </div>
+              </div>
+              <button id="add-row" class="button button-add" type="button"><span aria-hidden="true">+</span> Add row</button>
+            </div>
+            <div class="table-scroll">
+              <table>
+                <thead>
+                  <tr><th class="index-column">#</th><th class="topic-column">Topic</th><th>Collected information</th><th class="date-column">Added</th><th class="action-column"><span class="visually-hidden">Actions</span></th></tr>
+                </thead>
+                <tbody id="entry-rows"></tbody>
+              </table>
+              <div id="sheet-empty" class="sheet-empty" hidden>
+                <span aria-hidden="true">＋</span>
+                <strong>Your sheet is ready</strong>
+                <p>Add the first note this assistant should know.</p>
+                <button class="text-button" type="button" data-action="add-first-row">Add a row <span aria-hidden="true">→</span></button>
+              </div>
+            </div>
+            <div class="sheet-footer"><span><span class="footer-dot"></span> Changes save to this assistant's knowledge</span><span id="save-status" aria-live="polite">Ready</span></div>
+          </section>
+
+          <section class="ask-section" aria-labelledby="ask-title">
+            <div class="ask-heading">
+              <div class="ask-icon" aria-hidden="true">?</div>
+              <div><p class="eyebrow">Search the sheet</p><h2 id="ask-title">Ask this assistant</h2></div>
+            </div>
+            <form id="ask-form" class="ask-form">
+              <label class="visually-hidden" for="question">Question</label>
+              <input id="question" name="question" placeholder="Ask about information saved above..." required>
+              <button class="button button-dark" type="submit">Search notes <span aria-hidden="true">→</span></button>
+            </form>
+            <div id="answer" class="answer" aria-live="polite"></div>
+          </section>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
